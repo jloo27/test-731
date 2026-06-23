@@ -137,11 +137,15 @@ body {
 .nav-dropdown > a::before {
     content: '▶';
     font-size: 9px;
-    order: 2; /* Menaruh ikon panah setelah teks */
+    order: 2; 
     transition: transform 0.3s ease;
 }
 
 .nav-dropdown.open > a::before {
+    transform: rotate(90deg);
+}
+
+.nav-dropdown:hover > a::before {
     transform: rotate(90deg);
 }
 
@@ -181,7 +185,6 @@ body {
     .site-nav {
         flex-wrap: wrap;
         padding: 10px 18px;
-
     }
 
     .nav-toggle {
@@ -195,8 +198,8 @@ body {
         gap: 0;
         background: var(--warm-white);
         border-top: 1px solid var(--parchment);
-        align-items: center;
-        text-align: center;
+        align-items: stretch;
+        text-align: left;
     }
 
     .site-nav.open .nav-links {
@@ -210,11 +213,23 @@ body {
     .nav-submenu a {
         width: 100%;
         padding: 12px 18px;
-        text-align: center;
+        text-align: left;
     }
 
-    .nav-links a {
+    .nav-links a,
+    .nav-dropdown > a,
+    .nav-dropdown-menu a,
+    .nav-submenu a,
+    .nav-submenu-title,
+    .nav-coming-soon {
         border-bottom: 1px solid rgba(74, 55, 40, 0.08);
+        background: var(--warm-white);
+    }
+
+    .nav-dropdown > a {
+        justify-content: space-between;
+        display: inline-flex;
+        align-items: center;
     }
 
     .nav-dropdown-menu {
@@ -222,10 +237,11 @@ body {
         top: auto;
         left: auto;
         min-width: auto;
-        border: none;
+        border: 1px solid rgba(74, 55, 40, 0.08);
+        border-top: none;
         box-shadow: none;
         padding: 0;
-        background: transparent;
+        background: var(--warm-white);
         display: none;
         width: 100%;
     }
@@ -240,12 +256,21 @@ body {
         padding: 0;
         width: 100%;
     }
-
+    .nav-links > a::after,
+    .nav-dropdown > a::after {
+        content: '';
+        transform-origin: bottom right;
+        transition: transform 0.3s ease;
+    }
+    .nav-dropdown > a::before {
+        content: '▶';
+        transition: transform 0.2s ease;
+    }
     .nav-dropdown-menu a {
-        padding-left: 18px;
+        padding-left: 22px;
         border-bottom: 1px solid rgba(74, 55, 40, 0.08);
         background: var(--warm-white);
-        text-align: center;
+        text-align: left;
     }
 
     .nav-submenu {
@@ -260,10 +285,10 @@ body {
     }
 
     .nav-submenu a {
-        padding-left: 18px;
+        padding-left: 28px;
         border-bottom: 1px solid rgba(74, 55, 40, 0.08);
         background: var(--warm-white);
-        text-align: center;
+        text-align: left;
     }
 
     .nav-dropdown-group.open .nav-submenu {
@@ -306,29 +331,31 @@ body {
 
 .nav-submenu {
     display: none;
-    position: absolute;
-    top: -8px;
-    left: calc(100% + 0px);
-    min-width: 220px;
+    position: static;
+    top: auto;
+    left: auto;
+    min-width: 100%;
+    width: 100%;
     background: var(--warm-white);
-    border: 1px solid var(--parchment);
-    border-radius: 4px;
-    padding: 8px 0;
-    box-shadow: 0 8px 20px rgba(74, 55, 40, 0.12);
+    border: none;
+    border-radius: 0 0 4px 4px;
+    padding: 0;
+    box-shadow: none;
     flex-direction: column;
     gap: 0;
-    z-index: 1001;
+    z-index: auto;
 }
 
 .nav-submenu a {
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: none;
-    padding: 10px 16px;
+    padding: 10px 18px;
     display: block;
     transition: all 0.2s ease;
     color: var(--brown-mid);
-    border-bottom: none; /* Submenu tidak memerlukan garis bawah */
+    border-bottom: 1px solid rgba(74, 55, 40, 0.08);
+    background: var(--warm-white);
 }
 
 .nav-submenu a::after {
